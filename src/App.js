@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import Graph, { engine } from './Graph'
 
 function App() {
+  const update = () => {
+    console.log(engine.model.getNodes()[0])
+    engine.model.getNodes()[0].text = Date.now()
+    // engine.repaintCanvas()
+  }
+
+  window.engine = engine
+  window.update = update
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Graph />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
