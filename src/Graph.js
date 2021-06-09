@@ -3,16 +3,19 @@ import './main.css'
 import createEngine, {
   DefaultLinkModel,
   DiagramModel,
+  DiagramEngine,
+  DefaultLinkFactory,
 } from '@projectstorm/react-diagrams'
 import { JSCustomNodeFactory } from './custom-node-js/JSCustomNodeFactory'
 import { JSCustomNodeModel } from './custom-node-js/JSCustomNodeModel'
 import { BodyWidget } from './BodyWidget'
 
 // create an instance of the engine
-const engine = createEngine()
-
+const engine = new DiagramEngine()
+engine.installDefaultFactories();
 // register the two engines
-engine.getNodeFactories().registerFactory(new JSCustomNodeFactory())
+engine.registerLinkFactory(new DefaultLinkFactory())
+engine.registerNodeFactory(new JSCustomNodeFactory())
 
 // create a diagram model
 const model = new DiagramModel()
@@ -32,16 +35,16 @@ const node2 = new JSCustomNodeModel({
 })
 node2.setPosition(200, 50)
 
-const link1 = new DefaultLinkModel()
-link1.setSourcePort(node1.getPort('out'))
-link1.setTargetPort(node2.getPort('in'))
+var port1 = node1.getPort('in')
+console.log(port1)
+var link1 = port1.link(node2.getPort("in"));
 
 model.addAll(node1, node2, link1)
 
 //####################################################
 
 // install the model into the engine
-engine.setModel(model)
+engine.setDiagramModel(model)
 
 export { engine }
 

@@ -1,21 +1,28 @@
 import * as React from 'react';
 import { PortWidget } from '@projectstorm/react-diagrams';
 
+const Test = React.memo((node) => (
+  <>
+    <div className="custom-node-color" style={{ backgroundColor: node.color }} />
+    <p className="text">{node.text}</p>
+  </>
+))
+
 export class JSCustomNodeWidget extends React.Component {
   render() {
     console.log('ren')
+    const { node } = this.props
     return (
       <div className="wrapper">
         <div className="custom-node">
-          <PortWidget engine={this.props.engine} port={this.props.node.getPort('in')}>
+          <PortWidget node={node} name="in">
             <div className="circle-port" />
           </PortWidget>
-          <PortWidget engine={this.props.engine} port={this.props.node.getPort('out')}>
+          <PortWidget node={node} name="out">
             <div className="circle-port" />
           </PortWidget>
         </div>
-        <div className="custom-node-color" style={{ backgroundColor: this.props.node.color }} />
-        <p className="text">{this.props.node.text}</p>
+        <Test {...node} />
       </div>
     );
   }

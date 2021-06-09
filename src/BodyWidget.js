@@ -1,10 +1,10 @@
 import * as React from "react";
-import { CanvasWidget } from "@projectstorm/react-canvas-core";
+import { DiagramWidget } from "@projectstorm/react-diagrams";
 
 export class BodyWidget extends React.Component {
   render() {
     return (
-      <CanvasWidget className="diagram-container" engine={this.props.engine} />
+      <DiagramWidget className="diagram-container" diagramEngine={this.props.engine} />
     );
   }
 }

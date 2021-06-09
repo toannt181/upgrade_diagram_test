@@ -1,11 +1,14 @@
 import './App.css'
 import Graph, { engine } from './Graph'
+import '@projectstorm/react-diagrams/dist/style.min.css'
+import './main.css'
 
 function App() {
   const update = () => {
-    console.log(engine.model.getNodes()[0])
-    engine.model.getNodes()[0].text = Date.now()
-    // engine.repaintCanvas()
+    const node = Object.values(engine.diagramModel.getNodes())[0]
+    console.log(node)
+    node.text = Date.now()
+    engine.repaintCanvas()
   }
 
   window.engine = engine

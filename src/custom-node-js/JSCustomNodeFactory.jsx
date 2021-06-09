@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { JSCustomNodeModel } from './JSCustomNodeModel';
 import { JSCustomNodeWidget } from './JSCustomNodeWidget';
-import { AbstractReactFactory } from '@projectstorm/react-canvas-core';
+import { AbstractNodeFactory } from '@projectstorm/react-diagrams';
 
-export class JSCustomNodeFactory extends AbstractReactFactory {
+export class JSCustomNodeFactory extends AbstractNodeFactory {
   constructor() {
     super('Text');
   }
@@ -12,7 +12,7 @@ export class JSCustomNodeFactory extends AbstractReactFactory {
     return new JSCustomNodeModel();
   }
 
-  generateReactWidget(event) {
-    return <JSCustomNodeWidget engine={this.engine} node={event.model} />;
+  generateReactWidget(engine, node) {
+    return <JSCustomNodeWidget node={node} />;
   }
 }
